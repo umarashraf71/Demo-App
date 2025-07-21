@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 
 class Helper
 {
-    public static function applClasses()
+   public static function applClasses()
     {
         // Demo
         $fullURL = request()->fullurl();
@@ -26,15 +26,15 @@ class Helper
         } else {
             $data = config('custom.custom');
         }
-        if(request()->cookie('theme') != null && strlen(request()->cookie('theme')) <= 5)
-        $mode = request()->cookie('theme');
+        if (request()->cookie('theme') != null && strlen(request()->cookie('theme')) <= 5)
+            $mode = request()->cookie('theme');
         else
-        $mode = 'light';
+            $mode = 'light';
 
         // default data array
         $DefaultData = [
             'mainLayoutType' => 'vertical',
-            'theme' => ''.$mode.'',
+            'theme' => '' . $mode . '',
             'sidebarCollapsed' => false,
             'navbarColor' => '',
             'horizontalMenuType' => 'floating',
@@ -52,7 +52,8 @@ class Helper
         ];
 
         // if any key missing of array from custom.php file it will be merge and set a default value from dataDefault array and store in data variable
-        $data = array_merge($DefaultData, $data);
+        // $data = array_merge($DefaultData, $data);
+        $data = $DefaultData;
 
         // All options available in the template
         $allOptions = [
@@ -102,7 +103,7 @@ class Helper
                 }
             }
         }
-        
+
         //layout classes
         $layoutClasses = [
             'theme' => $data['theme'],
