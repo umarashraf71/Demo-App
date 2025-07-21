@@ -1,0 +1,143 @@
+@extends('layouts/contentLayoutMaster')
+
+@section('title', 'Edit Zone')
+@section('vendor-style')
+  <!-- vendor css files -->
+  <link rel="stylesheet" href="{{ asset('vendors/css/forms/select/select2.min.css') }}">
+@endsection
+@section('content')
+<!-- Basic multiple Column Form section start -->
+<section id="multiple-column-form">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Edit Zone</h4>
+        </div>
+        <div class="card-body">
+            @if ($errorMessage = Session::get('errorMessage'))
+            <div class="demo-spacing-0 my-2">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <div class="alert-body">{{ $errorMessage }}</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+            @endif
+          <form class="form" action="{{ route('zone.update',$zone->id) }}" method="POST">
+            @csrf
+            @method('PUT')
+            <div class="row">
+                <div class="col-md-6 col-12">
+                  <div class="mb-1">
+                    <label class="form-label" for="mcas-code-column">Zone Code</label> <span class="text-danger">*</span>
+                    <input
+                      type="text"
+                      id="mcas-code-column"
+                      class="form-control"
+                      name="code"
+                      value="{{ $zone->code }}"
+                      disabled
+                    />
+                      @error('code')
+                          <span class="text-danger">{{$message}}</span>
+                      @enderror
+                  </div>
+                </div>
+                <div class="col-md-6 col-12">
+                  <div class="mb-1">
+                      <label class="form-label" for="select2-multiple"> Section</label> <span class="text-danger">*</span>
+                      <select
+                          class="select2 form-select"
+                          id="select2-multiple"
+                          name="section_id"
+                      >
+                      @foreach ($all_section as $value)
+                        <option
+                            value="{{ $value->id }}"
+                            @if ($value->id === $zone->section_id)
+                            {{ "selected" }}
+                            @endif
+                        >
+                        {{ $value->name }}
+                        </option>
+                        @endforeach
+                      </select>
+                      @error('section_id')
+                          <span class="text-danger">{{$message}}</span>
+                      @enderror
+                  </div>
+                </div>
+                <div class="col-md-6 col-12">
+                  <div class="mb-1">
+                    <label class="form-label" for="name-column">Name</label> <span class="text-danger">*</span>
+                    <input
+                      type="text"
+                      id="name-column"
+                      class="form-control"
+                      placeholder="Name"
+                      name="name"
+                      value="{{ $zone->name }}"
+                    />
+                    @error('name')
+                          <span class="text-danger">{{$message}}</span>
+                    @enderror
+                  </div>
+                </div>
+                <div class="col-md-6 col-12">
+                  <div class="mb-1">
+                    <label class="form-label" for="mcas-address">Address</label> <span class="text-danger">*</span>
+                    <input
+                      type="text"
+                      id="mcas-address"
+                      class="form-control"
+                      placeholder="Address"
+                      name="address"
+                      value="{{ $zone->address }}"
+                    />
+                    @error('address')
+                          <span class="text-danger">{{$message}}</span>
+                    @enderror
+                  </div>
+                </div>
+                <div class="col-md-6 col-12">
+                  <div class="mb-1">
+                    <label class="form-label" for="mcas-contact">Contact</label ><span class="text-danger">*</span>
+                    <input
+                      type="text"
+                      id="mcas-contact"
+                      class="form-control phone"
+                      name="contact"
+                      placeholder="+92-3XX-XXXXXXX"
+                      value="{{ $zone->contact }}"
+                    />
+                    @error('contact')
+                          <span class="text-danger">{{$message}}</span>
+                    @enderror
+                  </div>
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary me-1">Submit</button>
+                  <button type="reset" class="btn btn-outline-secondary me-1">Reset</button>
+                  <a class="btn btn-outline-secondary cancel-btn" href="{{ route('zone.index') }}" >Cancel</a>
+                </div>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Basic Floating Label Form section end -->
+@endsection
+@section('vendor-script')
+    <!-- vendor files -->
+    <script src="{{ asset('vendors/js/forms/select/select2.full.min.js') }}"></script>
+@endsection
+@section('page-script')
+    <!-- Page js files -->
+    <script src="{{ asset('js/scripts/forms/form-select2.js') }}"></script>
+    <script src="https://rawgit.com/RobinHerbots/Inputmask/4.x/dist/jquery.inputmask.bundle.js"></script>
+    <script>
+        $('.phone').inputmask({mask: '+\\92-399-9999999'});
+    </script>
+@endsection

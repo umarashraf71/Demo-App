@@ -2,15 +2,20 @@
 
 namespace App\Exceptions;
 
+use HttpException;
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
+
 
 class Handler extends ExceptionHandler
 {
     /**
      * A list of the exception types that are not reported.
      *
-     * @var array<int, class-string<Throwable>>
+     * @var array
      */
     protected $dontReport = [
         //
@@ -19,10 +24,9 @@ class Handler extends ExceptionHandler
     /**
      * A list of the inputs that are never flashed for validation exceptions.
      *
-     * @var array<int, string>
+     * @var array
      */
     protected $dontFlash = [
-        'current_password',
         'password',
         'password_confirmation',
     ];
@@ -32,10 +36,28 @@ class Handler extends ExceptionHandler
      *
      * @return void
      */
+
     public function register()
     {
-        $this->reportable(function (Throwable $e) {
-            //
-        });
+
+        // $this->renderable(function (Throwable $e, $request) {
+        //     if ($request->is('api/*')) {
+        //         $status_code = 200;
+        //         if ($e instanceof AuthenticationException && $e->getMessage() == 'Unauthenticated.') {
+        //            $status_code = 401;
+        //         }
+
+        //         return response()->json([
+        //             'errorMessage' => $e->getMessage(),
+        //             'isSuccessful' => false,
+        //         ], $status_code);
+        //     }
+        // });
+
+        // $this->reportable(function (Throwable $e){
+        // });
+
+
     }
+
 }

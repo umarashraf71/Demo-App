@@ -3,11 +3,9 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 
-class CreatePasswordResetsTable extends Migration
+class CreatePasswordResetsTable  extends Migration
 {
-    use DatabaseMigrations;
     
     /**
      * Run the migrations.
@@ -32,4 +30,4 @@ class CreatePasswordResetsTable extends Migration
     {
         Schema::dropIfExists('password_resets');
     }
-}
+};

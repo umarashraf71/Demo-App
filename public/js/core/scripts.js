@@ -1,0 +1,28 @@
+/******/ (() => { // webpackBootstrap
+var __webpack_exports__ = {};
+/*!****************************************!*\
+  !*** ./resources/assets/js/scripts.js ***!
+  \****************************************/
+(function (window, undefined) {
+  'use strict';
+
+  /*
+  NOTE:
+  ------
+  PLACE HERE YOUR OWN JAVASCRIPT CODE IF NEEDED
+  WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR JAVASCRIPT CODE PLEASE CONSIDER WRITING YOUR SCRIPT HERE.  */
+})(window);
+/******/ })()
+;
+
+function showAlert(type,message) {
+    let heading = 'Error!';
+    if(type=='success'){
+        heading = 'Success!'
+    }
+    toastr[type](message, heading, {
+        closeButton: true,
+        tapToDismiss: false,
+        rtl: false
+    });
+}

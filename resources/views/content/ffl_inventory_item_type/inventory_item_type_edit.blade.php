@@ -1,0 +1,72 @@
+@extends('layouts/contentLayoutMaster')
+
+@section('title', 'Edit Inventory Item Type')
+
+@section('content')
+<!-- Basic multiple Column Form section start -->
+<section id="multiple-column-form">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Edit Inventory Item Type</h4>
+        </div>
+        <div class="card-body">
+        @if ($errorMessage = Session::get('errorMessage'))
+        <div class="demo-spacing-0 my-2">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <div class="alert-body">{{ $errorMessage }}</div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+        @endif
+          <form class="form" action="{{ route('inventory-item-type.update', $inventoryItemType->id) }}" method="POST">
+            @csrf
+            @method('PUT')
+            <div class="row">
+              <div class="col-md-6 col-12">
+                <div class="mb-1">
+                  <label class="form-label" for="name-column">Name *</label>
+                  <input
+                    type="text"
+                    id="name-column"
+                    class="form-control"
+                    placeholder="Name"
+                    name="name"
+                    value="{{ $inventoryItemType->name }}"
+                  />
+                  @error('name')
+                        <span class="text-danger">{{$message}}</span>
+                  @enderror
+                </div>
+              </div>
+              <div class="col-md-6 col-12">
+                <div class="mb-1">
+                  <label class="form-label" for="description-colum">Description *</label>
+                  <input
+                    type="text"
+                    id="description-colum"
+                    class="form-control"
+                    placeholder="Description"
+                    name="description"
+                    value="{{ $inventoryItemType->description }}"
+                  />
+                  @error('address')
+                        <span class="text-danger">{{$message}}</span>
+                  @enderror
+                </div>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary me-1">Submit</button>
+                <button type="reset" class="btn btn-outline-secondary">Reset</button>
+                <a class="btn btn-outline-secondary cancel-btn" href="{{ route('inventory-item-type.index') }}" >Cancel</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Basic Floating Label Form section end -->
+@endsection
